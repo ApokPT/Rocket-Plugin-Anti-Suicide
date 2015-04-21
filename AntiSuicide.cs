@@ -25,7 +25,8 @@ namespace ApokPT.RocketPlugins
 
         private void RocketServerEvents_OnPlayerConnected(RocketPlayer player)
         {
-            if (player.Permissions.Contains("anti-suicide.imune")) return;
+            if (player.IsAdmin || player.Permissions.Contains("anti-suicide.imune")) return;
+
             validateRelocation(player, player.Position, player.Rotation);
         }
 
@@ -33,13 +34,14 @@ namespace ApokPT.RocketPlugins
 
         internal void RocketPlayerEvents_OnPlayerRevive(RocketPlayer player, Vector3 position, byte angle)
         {
-            if (player.Permissions.Contains("anti-suicide.imune")) return;
+            if (player.IsAdmin || player.Permissions.Contains("anti-suicide.imune")) return;
+
             if (!validateKick(player)) validateRelocation(player, position, angle);
         }
 
         private void RocketPlayerEvents_OnPlayerDeath(RocketPlayer player, EDeathCause cause, ELimb limb, CSteamID murderer)
         {
-            if (player.Permissions.Contains("anti-suicide.imune")) return;
+            if (player.IsAdmin || player.Permissions.Contains("anti-suicide.imune")) return;
 
             if (cause != EDeathCause.SUICIDE)
             {
