@@ -27,7 +27,7 @@ namespace ApokPT.RocketPlugins
         {
             if (player.IsAdmin || player.Permissions.Contains("anti-suicide.imune")) return;
 
-            validateRelocation(player, player.Position, player.Rotation);
+            validateRelocation(player, player.Position, player.Rotation, false);
         }
 
         private Timer timer;
@@ -53,7 +53,7 @@ namespace ApokPT.RocketPlugins
             }
         }
 
-        private void validateRelocation(RocketPlayer player, Vector3 position, float angle)
+        private void validateRelocation(RocketPlayer player, Vector3 position, float angle, bool generate = true)
         {
             if (SpawnLocations.ContainsKey(player.ToString()))
             {
@@ -66,7 +66,7 @@ namespace ApokPT.RocketPlugins
             }
             else
             {
-                SpawnLocations.Add(player.ToString(), new SpawnLocation(position, angle));
+               if (generate) SpawnLocations.Add(player.ToString(), new SpawnLocation(position, angle));
             }
         }
 
