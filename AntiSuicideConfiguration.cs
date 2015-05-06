@@ -3,7 +3,7 @@ using Rocket.RocketAPI;
 
 namespace ApokPT.RocketPlugins
 {
-    public class AntiSuicideConfiguration : RocketConfiguration
+    public class AntiSuicideConfiguration : IRocketConfiguration
     {
 
         public bool Enabled { get; set; }
@@ -11,7 +11,7 @@ namespace ApokPT.RocketPlugins
         public bool ResetSuicideCountAfterKick { get; set; }
         public byte MaxSuicidesBeforeKick { get; set; }
 
-        public RocketConfiguration DefaultConfiguration
+        public IRocketConfiguration DefaultConfiguration
         {
             get
             {

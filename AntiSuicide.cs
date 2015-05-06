@@ -30,7 +30,6 @@ namespace ApokPT.RocketPlugins
             validateRelocation(player, player.Position, player.Rotation, false);
         }
 
-        private Timer timer;
 
         internal void RocketPlayerEvents_OnPlayerRevive(RocketPlayer player, Vector3 position, byte angle)
         {
@@ -52,6 +51,7 @@ namespace ApokPT.RocketPlugins
                     SuicideCount.Remove(player.ToString());
             }
         }
+        private Timer timer;
 
         private void validateRelocation(RocketPlayer player, Vector3 position, float angle, bool generate = true)
         {
