@@ -20,16 +20,7 @@ namespace ApokPT.RocketPlugins
             if (!Configuration.Enabled) return;
             Rocket.RocketAPI.Events.RocketPlayerEvents.OnPlayerRevive += RocketPlayerEvents_OnPlayerRevive;
             Rocket.RocketAPI.Events.RocketPlayerEvents.OnPlayerDeath += RocketPlayerEvents_OnPlayerDeath;
-            Rocket.RocketAPI.Events.RocketServerEvents.OnPlayerConnected += RocketServerEvents_OnPlayerConnected;
         }
-
-        private void RocketServerEvents_OnPlayerConnected(RocketPlayer player)
-        {
-            if (player.IsAdmin || player.Permissions.Contains("anti-suicide.imune")) return;
-
-            validateRelocation(player, player.Position, player.Rotation, false);
-        }
-
 
         internal void RocketPlayerEvents_OnPlayerRevive(RocketPlayer player, Vector3 position, byte angle)
         {
@@ -42,7 +33,7 @@ namespace ApokPT.RocketPlugins
         {
             if (player.IsAdmin || player.Permissions.Contains("anti-suicide.imune")) return;
 
-            if (cause != EDeathCause.SUICIDE)
+            if (cause != EDeathCause.SUICIDE && cause != EDeathCause.BREATH)
             {
                 if (SpawnLocations.ContainsKey(player.ToString()))
                     SpawnLocations.Remove(player.ToString());
