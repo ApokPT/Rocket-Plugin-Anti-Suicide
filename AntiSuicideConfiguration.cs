@@ -1,9 +1,9 @@
 ﻿using Rocket;
-using Rocket.RocketAPI;
+using Rocket.API;
 
 namespace ApokPT.RocketPlugins
 {
-    public class AntiSuicideConfiguration : IRocketConfiguration
+    public class AntiSuicideConfiguration : IRocketPluginConfiguration
     {
 
         public bool Enabled { get; set; }
@@ -11,7 +11,7 @@ namespace ApokPT.RocketPlugins
         public bool ResetSuicideCountAfterKick { get; set; }
         public byte MaxSuicidesBeforeKick { get; set; }
 
-        public IRocketConfiguration DefaultConfiguration
+        public IRocketPluginConfiguration DefaultConfiguration
         {
             get
             {

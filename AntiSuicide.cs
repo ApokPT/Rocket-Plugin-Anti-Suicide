@@ -1,8 +1,10 @@
-﻿using Rocket.Logging;
-using Rocket.RocketAPI;
+﻿using Rocket.Core.Logging;
+using Rocket.Unturned;
+using Rocket.Unturned.Events;
+using Rocket.Unturned.Player;
+using Rocket.Unturned.Plugins;
 using SDG;
 using Steamworks;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
@@ -18,8 +20,8 @@ namespace ApokPT.RocketPlugins
         protected override void Load()
         {
             if (!Configuration.Enabled) return;
-            Rocket.RocketAPI.Events.RocketPlayerEvents.OnPlayerRevive += RocketPlayerEvents_OnPlayerRevive;
-            Rocket.RocketAPI.Events.RocketPlayerEvents.OnPlayerDeath += RocketPlayerEvents_OnPlayerDeath;
+            RocketPlayerEvents.OnPlayerRevive += RocketPlayerEvents_OnPlayerRevive;
+            RocketPlayerEvents.OnPlayerDeath += RocketPlayerEvents_OnPlayerDeath;
         }
 
         internal void RocketPlayerEvents_OnPlayerRevive(RocketPlayer player, Vector3 position, byte angle)
@@ -83,7 +85,7 @@ namespace ApokPT.RocketPlugins
         {
             if (SpawnLocations.ContainsKey(player.ToString()))
             {
-                RocketChatManager.Say(player, Translate("anti_suicide_warning"));
+                RocketChat.Say(player, Translate("anti_suicide_warning"));
                 player.Teleport(SpawnLocations[player.ToString()].Position, SpawnLocations[player.ToString()].Angle);
             }
                 
